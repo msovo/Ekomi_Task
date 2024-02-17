@@ -70,3 +70,40 @@ text-align: center;
     color: green;
     font-weight: bolder;
 }
+
+
+.TableUserForm,.TableTaskForm  {
+    width: 50%;
+    margin-left: 25%;
+}
+
+.container h3 {
+    text-align: center;
+}
+table tr{
+    height: 45px;
+    color: green;
+}
+.TableUserForm input[type="text"] {
+    width: 100%;
+    border:none;
+    border-bottom: 2px solid green ;
+}
+
+.TableTaskForm input[type="text"] {
+    width: 100%;
+    border:none;
+    border-bottom: 2px solid green ;
+}
+
+.Btn_SubmitTask,.Btn_SubmitUser{
+
+    width: 100%;
+    margin-top:10px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 10px;
+
+}

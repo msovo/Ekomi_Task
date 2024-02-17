@@ -48,11 +48,61 @@ $WeatherStatus=$APIResult->weather[0]-> description;
     </header>
     <div class="container">
         <div class="sidebar">
-            <button type="button" class="ListCandidate"  onclick="ListCandidate()">List Candidates</button>
-            <button type="button" class="ListCandidate">Add a Candidates</button>
+            <button type="button" class="ViewAssingedTasks">View Assinged Tasks</button>
+            <button type="button" class="ListUsers"  onclick="Listusers()">List Users</button>
+            <button type="button" class="AddUser">Add a User</button>
+            <button type="button" class="ListTasks">List Tasks</button>
+            <button type="button" class="CreateATask">Create a Task</button>
         </div>
         <div class="mainbar">
-    list
+    <div class="TableCreateuser" >
+        <div class="Headinguser">
+            <h3>Add a new user the system</h3>
+        </div>
+        <form method="post" id="FormTaskSubmit">
+            <table class="TableUserForm">
+                <tr>
+                    <td>FullName</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td> <input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Date of birth</td>
+                    <td> <input type="date"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> <button type="button" class="Btn_SubmitUser">Submit</button></td>
+                </tr>
+            </table>
+           
+        </form>
+    </div>
+    <div class="TableCreateTask">
+    <div class="HeadingTask">
+            <h3>Add a new Task the system</h3>
+        </div>
+        <form method="post" id="FormTaskSubmit">
+            <table class="TableTaskForm">
+                <tr>
+                    <td>Type</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td> <input type="text"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="button" class="Btn_SubmitTask">Submit</button></td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
         </div>
     </div>
 </body>

@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="Styles/EkomiCSS.css" /> 
+    <script src="JS/jquery.js"></script>
+
     <title>Task Management</title>
 </head>
 <body>
@@ -55,7 +57,7 @@ $WeatherStatus=$APIResult->weather[0]-> description;
             <button type="button" class="CreateATask">Create a Task</button>
         </div>
         <div class="mainbar">
-    <div class="TableCreateuser" >
+    <div class="TableCreateuser"  style="display: none;">
         <div class="Headinguser">
             <h3>Add a new user the system</h3>
         </div>
@@ -63,45 +65,44 @@ $WeatherStatus=$APIResult->weather[0]-> description;
             <table class="TableUserForm">
                 <tr>
                     <td>FullName</td>
-                    <td><input type="text"></td>
+                    <td><input type="text" id="fullnames"></td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td> <input type="text"></td>
+                    <td> <input type="text" id="email"></td>
                 </tr>
                 <tr>
                     <td>Date of birth</td>
-                    <td> <input type="date"></td>
+                    <td> <input type="date" id="dateofbirth"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td> <button type="button" class="Btn_SubmitUser">Submit</button></td>
+                    <td> <button type="button" onclick="CollectFromForm(2)"  class="Btn_SubmitUser">Submit</button></td>
                 </tr>
             </table>
            
         </form>
     </div>
-    <div class="TableCreateTask">
+    <div class="TableCreateTask" style="display: none;">
     <div class="HeadingTask">
             <h3>Add a new Task the system</h3>
         </div>
-        <form method="post" id="FormTaskSubmit">
             <table class="TableTaskForm">
                 <tr>
                     <td>Type</td>
-                    <td><input type="text"></td>
+                    <td><input type="text" id='tasktype'></td>
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td> <input type="text"></td>
+                    <td> <input type="text" id='taskDescription'></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><button type="button" class="Btn_SubmitTask">Submit</button></td>
+                    <td><button type="button" onclick="CollectFromForm(1)" class="Btn_SubmitTask">Submit</button></td>
                 </tr>
 
             </table>
-        </form>
+    
     </div>
         </div>
     </div>
@@ -117,4 +118,6 @@ $WeatherStatus=$APIResult->weather[0]-> description;
         2/17/2024
     </div>
 </div>
+
+<script src="JS/index.js"></script>
 </html>

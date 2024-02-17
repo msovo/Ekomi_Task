@@ -1,0 +1,22 @@
+.topLayer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.left{
+    text-align: center;
+    border: 1px green solid;
+}
+
+.center{
+    font-size: 18px;
+    color: green;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.right{
+    font-size: 18px;
+    color: green;
+    font-weight: bolder;
+}

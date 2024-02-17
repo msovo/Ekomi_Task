@@ -46,5 +46,25 @@ $WeatherStatus=$APIResult->weather[0]-> description;
             </div>
         </div>
     </header>
+    <div class="container">
+        <div class="sidebar">
+            <button type="button" class="ListCandidate"  onclick="ListCandidate()">List Candidates</button>
+            <button type="button" class="ListCandidate">Add a Candidates</button>
+        </div>
+        <div class="mainbar">
+    list
+        </div>
+    </div>
 </body>
+<div class="footer">
+    <div class="Fleft">
+        EKOMI Task Management for recruitement process
+    </div>
+    <div class="Fcenter">
+        Designed by Msovo
+    </div>
+    <div class="Fright">
+        2/17/2024
+    </div>
+</div>
 </html>

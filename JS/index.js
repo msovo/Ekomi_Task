@@ -1,12 +1,12 @@
 $(".AddUser").click(function(){
-    $(".TableCreateTask").css("display","none");;
-
+    $(".TableCreateTask").css("display","none");
+    $(".DynamicHTMLPlaceholder").html("")
     $(".TableCreateuser").fadeIn("slow");
 
 });
 $(".CreateATask").click(function(){
     $(".TableCreateuser").css("display","none");
-
+    $(".DynamicHTMLPlaceholder").html("")
     $(".TableCreateTask").fadeIn("slow");
 });
 
@@ -30,7 +30,7 @@ function CollectFromForm(type) {
             formdata.append("tasktype",tasktype);
             formdata.append("taskDescription",taskDescription);
             formdata.append("Request","Task");
-            AjaxRequest(formdata)
+            AjaxPostRequest(formdata)
         }else{
             $(".errorwarning").remove()
             $(".Btn_Submittask").after("<div class='errorwarning' style='color:red'>Please fill in all the required fields</div>")
@@ -53,7 +53,7 @@ function CollectFromForm(type) {
             formdata.append("dateofbirth",dateofbirth);
             formdata.append("Request","User");
 
-            AjaxRequest(formdata)
+            AjaxPostRequest(formdata)
 
         }else{
             $(".errorwarning").remove()
@@ -87,19 +87,112 @@ function validinputCheck(input){
 }
 
 //formdata Takes a parameter of the data to send to the server
-function AjaxRequest(formdata){
+function AjaxPostRequest(formdata){
     var xhr= new XMLHttpRequest();
     xhr.onload=function(){
-        ResponseFromAjax(this.responseText)
+        ResponseFromAjaxPost(this.responseText)
         }
     xhr.open("POST","_PHP/Home.php")
     xhr.send(formdata);
 }
 
-function ResponseFromAjax(res){
+function ResponseFromAjaxPost(res){
     alert(res)
     if(res==1){
         $(".TableCreateuser").css("display","none");
         $(".TableCreateTask").css("display","none");
     }
+}
+
+
+//function that will be executed when we press the list button from the GUI
+//the parameter will be based on the type of an action is required, whether to list users/tasks/or asigned tasks
+
+//use get request to get the list as per the nature of the request
+function AjaxGetRequest(Table){
+var xhr= new XMLHttpRequest();
+    xhr.onload=function(){
+        ResponseFromAjaxGet(this.responseText)
+        }
+    xhr.open("GET","_PHP/Home.php?Action=List&&Table="+Table+"")
+    xhr.send();
+}
+
+function ResponseFromAjaxGet(Data){
+    Newdata=JSON.parse(Data);
+//Explains the number between 1 and 3 in terms of refering to tablenames
+// 1 = Users table
+// 2 = Task table
+// 3 = Assigned tasks table
+
+    if(Newdata["TblError"]==1){
+        switch(Newdata["TblName"])
+        {
+            case 1:
+                CreateHTMLCode(Newdata.data, "Users")
+                break;
+            case 2:
+                CreateHTMLCode(Newdata.data,"Tasks")
+                break;
+            case 3:
+                CreateHTMLCode(Newdata.data,"Assigned Tasks")
+                break;
+            default:
+                break;
+
+        }
+    }
+
+}
+
+//this  function will create an html code for our lists
+function CreateHTMLCode(data,description) {
+
+    var output="<div>"+description+"</div><table>"
+    for(var i=0;i<data.length;i++)
+    {
+        var id
+        output +="<tr>"
+        for(var j=0;j<data[i].length;j++){
+            output += "<td>" + data[i][j] + "</td>"
+            id=data[i][0]
+        }
+        output += "<td><button type='button' class='Delete' onclick='DeleteFunc("+id+","+i+")'>Delete</button></td>"
+        +"<td><button type='button' class='Edit'  onclick='EditFunc("+id+","+i+")'>Edit</button></td>"
+        +"</tr>"
+    }
+    output += "</table></div>"+sortFilter(data)+""
+
+    AddToDisplayThelist(output,description)
+
+}
+
+function sortFilter(data){
+    output="<div>"
+   + '<input type="radio" id="Ascending" name="sort_by_id" value="Ascending">'
+   + '<label for="Ascending">Ascending</label><br>'
+   + '<input type="radio" id="Descending" name="sort_by_id" value="Descending">'
+    +'<label for="Descending">Descending</label><br></br></div>'
+
+    return output
+}
+
+function AddToDisplayThelist(HMLcode,description) {
+    
+//Hide anything possible to be visible in the mainbar using DynamicHTMLPlaceholder area
+$(".DynamicHTMLPlaceholder").html("")
+$(".TableCreateuser").css("display","none");
+$(".TableCreateTask").css("display","none");
+$("."+description).css("display","none");//if possible it is  clicked it must be closed
+$(".DynamicHTMLPlaceholder").append("<div class="+description+" style='display:none'>"+HMLcode+"</div>")
+$("."+description).fadeIn("slow");
+
+}
+
+function DeleteFunc(Id, Index){
+
+}
+
+function EditFunc(Id, Index){
+
 }

@@ -53,15 +53,27 @@ if(isset($_GET["Action"]) && isset($_GET["Table"])){
         $table="assinged_tasks_tbl";
         $ReturnObj->TblError=1;
         $ReturnObj->TblName=3;
-
+      case 4:
+        $ReturnObj->TblError=1;
+        $ReturnObj->TblName=4;
+      break;
      default:
         $ReturnObj->TblError=-1;
         break;
 }
-
-
-  if($action=="List"){
-    $sqlQuery="SELECT * FROM ".$table."";
+//Check if the action is to list the task/users or it is for getting task and users data to enable a user to asign a taskk to the user
+  if($action=="List" || $action=="Asign"){
+    if($action =="Asign"){
+        $sqlQuery="(SELECT
+        Fullnames
+        FROM users_tbl)
+    UNION
+    (SELECT
+        Task_type
+        FROM tasks_tbl)";
+    }else{
+      $sqlQuery="SELECT * FROM ".$table."";
+    }
     $result = $con->query($sqlQuery);
     if ($result->num_rows > 0){
         $row = $result->fetch_all();

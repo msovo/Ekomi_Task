@@ -50,16 +50,21 @@ $WeatherStatus=$APIResult->weather[0]-> description;
     </header>
     <div class="container">
         <div class="sidebar">
-            <button type="button" class="ViewAssingedTasks" onclick="AjaxGetRequest(3)">View Assinged Tasks</button>
+        <div class="Asigntaskfunctions">
+                <label>Tasks Control</label><br/>
+                <button type="button" class="ViewAssingedTasks" onclick="AjaxGetRequest('List',3)">View Assinged Tasks</button>
+                <button type="button" class="AsignTasks" onclick="AjaxGetRequest('Asign',4)"> Assing a Task</button>
+                </div>
             <div class="gridButton">
+              
                 <div class="usersfunctions">
                 <label>Manage Users</label>
-                <button type="button" class="ListUsers"  onclick="AjaxGetRequest(1)">List Users</button>
+                <button type="button" class="ListUsers"  onclick="AjaxGetRequest('List',1)">List Users</button>
                 <button type="button" class="AddUser">Add a User</button>
                 </div>
                 <div class="tasksfunctions">
                 <label>Manage Tasks</label>
-                <button type="button" class="ListTasks" onclick="AjaxGetRequest(2)">List Tasks</button>
+                <button type="button" class="ListTasks" onclick="AjaxGetRequest('List',2)">List Tasks</button>
                 <button type="button" class="CreateATask">Create a Task</button>
                 </div>
             </div>

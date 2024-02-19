@@ -108,13 +108,13 @@ function ResponseFromAjaxPost(res){
 //function that will be executed when we press the list button from the GUI
 //the parameter will be based on the type of an action is required, whether to list users/tasks/or asigned tasks
 
-//use get request to get the list as per the nature of the request
-function AjaxGetRequest(Table){
+//use get request to get the list as per the nature of the request if it for listing of tasks or users or it is for the user to asgn a task to the user
+function AjaxGetRequest(action,Table){
 var xhr= new XMLHttpRequest();
     xhr.onload=function(){
         ResponseFromAjaxGet(this.responseText)
         }
-    xhr.open("GET","_PHP/Home.php?Action=List&&Table="+Table+"")
+    xhr.open("GET","_PHP/Home.php?Action="+action+"&&Table="+Table+"")
     xhr.send();
 }
 
@@ -124,6 +124,7 @@ function ResponseFromAjaxGet(Data){
 // 1 = Users table
 // 2 = Task table
 // 3 = Assigned tasks table
+///4 is getting data to create an assign task funtions
 
     if(Newdata["TblError"]==1){
         switch(Newdata["TblName"])
@@ -136,6 +137,9 @@ function ResponseFromAjaxGet(Data){
                 break;
             case 3:
                 CreateHTMLCode(Newdata.data,"Assigned Tasks")
+                break;
+            case 4:
+                HandleAsignTasks(Newdata.data)
                 break;
             default:
                 break;
@@ -186,6 +190,32 @@ $(".TableCreateTask").css("display","none");
 $("."+description).css("display","none");//if possible it is  clicked it must be closed
 $(".DynamicHTMLPlaceholder").append("<div class="+description+" style='display:none'>"+HMLcode+"</div>")
 $("."+description).fadeIn("slow");
+
+}
+
+
+function HandleAsignTasks(data){
+    
+    for(var j=0;j<1;j++){
+        switch(j){
+            case 0:
+                label="Whom does the task below to"
+                selectLabel="Please select the candidate"
+                break;
+            case 1:
+                label="Which task do you want to asign?"
+                selectLabel="Please select the task"
+        }
+    output="<label>"+label+"</label><select name='select"+j+"' class='select"+j+"'><option value='default'>"+selectLabel+"</option"
+    for(var i=0 ; data[j].length;i++){
+       // output+="<option value='"+data[j][i]+"'>"+data[j][i]+"</option>"
+    }
+    output+="</select>";
+
+ }
+ $(".DynamicHTMLPlaceholder").html("")
+ $(".DynamicHTMLPlaceholder").append(output)
+
 
 }
 
